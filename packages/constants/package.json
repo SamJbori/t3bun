@@ -11,8 +11,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "tsc -p tsconfig.build.json --watch",
-    "prepare": "bun run build"
+    "dev": "tsc -p tsconfig.build.json --watch"
   },
   "devDependencies": {
     "@types/bun": "latest"

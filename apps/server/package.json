@@ -2,8 +2,7 @@
   "name": "@repo/server",
   "type": "module",
   "scripts": {
-    "dev": "bun run --bun --port=3001 --hot src/index.ts",
-    "build": "bun run tsc --noEmit"
+    "dev": "bun run --bun --port=3001 --hot src/index.ts"
   },
   "dependencies": {
     "@repo/constants": "workspace:*",
