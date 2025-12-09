@@ -2,7 +2,7 @@
   "name": "@repo/server",
   "type": "module",
   "scripts": {
-    "dev": "bun run --hot src/index.ts --port=3001",
+    "dev": "bun run --bun --port=3001 --hot src/index.ts",
     "build": "bun run tsc --noEmit"
   },
   "dependencies": {
