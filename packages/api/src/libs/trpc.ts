@@ -2,18 +2,17 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import z, { ZodError } from "zod/v4";
 
-import type { Auth, AuthData } from "./auth";
+import type { AuthData } from "./auth";
+import { auth } from "./auth";
 import { collection, fromDBToRecord, fromDBToRecords } from "./db";
 import { env } from "./env";
 import { storage } from "./s3";
 
 export const createTRPCContext = async ({
   headers,
-  auth,
   // resHeaders,
 }: {
   headers: Headers;
-  auth: Auth;
 }) => {
   const session = (await auth.api.getSession({ headers })) as AuthData;
 

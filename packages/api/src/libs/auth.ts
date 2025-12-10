@@ -111,9 +111,8 @@ const authConfig = {
   },
 } satisfies BetterAuthOptions;
 
-const auth = betterAuth(authConfig);
+export const auth = betterAuth(authConfig);
 
-export const initAuth = () => betterAuth(authConfig);
 export type Auth = typeof auth;
 export type Session = InferSession<Auth>;
 export type User = InferUser<Auth>;

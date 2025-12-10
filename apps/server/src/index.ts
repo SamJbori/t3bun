@@ -4,13 +4,13 @@ import { logger } from "hono/logger";
 
 import "bun";
 
-import { initAuth } from "@repo/api";
+import { auth } from "@repo/api";
 
 import type { env } from "./env.js";
 
 // import { trpc } from "./libs/trpc.js";
 
-const app = new Hono<{ Bindings: typeof env }>();
+const app = new Hono<{ Bindings: typeof env }>({ strict: false });
 
 app.use(logger());
 
@@ -37,8 +37,6 @@ app.get("/test", (c) => c.text("OK"));
 // app.use("/v0.1/*", trpc);
 
 app.on(["POST", "GET"], "/auth/*", (c) => {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-  const auth = initAuth();
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return auth.handler(c.req.raw);
 });
