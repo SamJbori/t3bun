@@ -1,14 +1,33 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
+    /* ----------- Bun-friendly output ------------ */
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true, // Bun requires this
+
+    /* --------------- Strictness ----------------- */
     "strict": true,
     "skipLibCheck": true,
-    "types": ["bun"],
-    "jsx": "react-jsx",
-    "jsxImportSource": "hono/jsx",
-    "outDir": "./dist"
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noUncheckedIndexedAccess": true,
+
+    /* -------------- Interop & Module ------------ */
+    "esModuleInterop": true,
+    "moduleDetection": "force",
+
+    /* --------------- Path Aliases --------------- */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /* --------------- Emit ----------------------- */
+    "noEmit": true // Bun handles transpilation
   },
+
   "include": ["src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

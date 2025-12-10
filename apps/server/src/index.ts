@@ -1,14 +1,13 @@
+import "bun";
+
 import { trpcServer } from "@hono/trpc-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
-import type { env } from "./libs/env.js";
-
-import "bun";
-
-import { auth } from "./libs/auth.js";
-import { appRouter, createTRPCContext } from "./libs/trpc.js";
+import type { env } from "./libs/env";
+import { auth } from "./libs/auth";
+import { appRouter, createTRPCContext } from "./libs/trpc";
 
 export const trpc = trpcServer({
   router: appRouter,
