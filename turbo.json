@@ -7,12 +7,6 @@
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "check-types": {
-      "dependsOn": ["^check-types"]
-    },
     "clean": {
       "cache": false
     },
@@ -20,9 +14,16 @@
       "cache": false,
       "persistent": true
     },
+    "lint": {
+      "dependsOn": ["^lint"]
+    },
     "format": {
       "outputs": [".cache/.prettiercache"],
       "outputLogs": "new-only"
+    },
+    "typecheck": {
+      "dependsOn": ["^topo", "^build"],
+      "outputs": [".cache/tsbuildinfo.json"]
     }
   }
 }
