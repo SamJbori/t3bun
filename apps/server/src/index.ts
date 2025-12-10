@@ -12,9 +12,10 @@ import { appRouter, createTRPCContext } from "./libs/trpc";
 export const trpc = trpcServer({
   router: appRouter,
   createContext: async (_, c) => {
+    const headers = c.req.raw.headers;
     return createTRPCContext({
-      headers: c.req.raw.headers,
-      auth,
+      headers,
+      authData: await auth.api.getSession({ headers }),
     });
   },
   onError: ({ path, error }) => {
