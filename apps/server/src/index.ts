@@ -10,13 +10,13 @@ import { appRouter, auth, createTRPCContext } from "@repo/api";
 import type { env } from "./libs/env";
 
 export const trpc = trpcServer({
-  router: appRouter,
   createContext: async (_, c) => {
     return createTRPCContext({
       headers: c.req.raw.headers,
       auth,
     });
   },
+  router: appRouter,
   onError: ({ path, error }) => {
     console.error(`❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`);
   },
