@@ -1,7 +1,7 @@
 export { createTRPCContext } from "./libs/trpc";
 
-export { appRouter } from "./routers/routers";
-export type { AppRouter, RouterInputs, RouterOutputs } from "./routers/routers";
+export { appRouter } from "./libs/trpc";
+export type { AppRouter, RouterInputs, RouterOutputs } from "./libs/trpc";
 
 export { auth } from "./libs/auth";
 export type { Auth, Session, User, AuthData } from "./libs/auth";
