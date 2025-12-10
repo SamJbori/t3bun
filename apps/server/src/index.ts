@@ -5,18 +5,18 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 
-import { appRouter, auth, createTRPCContext } from "@repo/api";
-
 import type { env } from "./libs/env";
+import { auth } from "./libs/auth";
+import { appRouter, createTRPCContext } from "./libs/trpc";
 
 export const trpc = trpcServer({
+  router: appRouter,
   createContext: async (_, c) => {
     return createTRPCContext({
       headers: c.req.raw.headers,
       auth,
     });
   },
-  router: appRouter,
   onError: ({ path, error }) => {
     console.error(`❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`);
   },
@@ -45,12 +45,12 @@ app.use(
   }),
 );
 
-app.get("/", (c) => c.text("OK"));
+app.get("/test", (c) => c.text("OK"));
+
+app.use("/v0.1/*", trpc);
 
 app.on(["POST", "GET"], "/auth/*", async (c) => {
   return auth.handler(c.req.raw);
 });
-
-app.use("/v0.1/*", trpc);
 
 export default app;
