@@ -6,8 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "format": "prettier --check . --ignore-path ../../.gitignore",
+    "lint": "eslint",
     "start": "next start",
-    "lint": "eslint"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "bun": "latest",

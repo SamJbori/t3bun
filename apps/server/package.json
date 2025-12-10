@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "dev": "bun run --bun --port=3001 --hot src/index.ts",
-    "format": "prettier --check . --ignore-path ../../.gitignore"
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@repo/constants": "workspace:*",

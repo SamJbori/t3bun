@@ -16,6 +16,7 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@next/eslint-plugin-next": "^16.0.8",
     "@repo/prettier": "workspace:*",
+    "@repo/typescript": "workspace:*",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-only-warn": "^1.1.0",
