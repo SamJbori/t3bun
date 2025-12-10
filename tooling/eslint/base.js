@@ -19,6 +19,34 @@ export const config = [
     },
     rules: {
       "turbo/no-undeclared-env-vars": "warn",
+      // "no-restricted-properties": [
+      //   "error",
+      //   {
+      //     object: "process",
+      //     property: "env",
+      //     message:
+      //       "Use `import { env } from '@/env'` instead to ensure validated types.",
+      //   },
+      // ],
+      "no-restricted-imports": [
+        "error",
+        {
+          name: "process",
+          importNames: ["env"],
+          message:
+            "Use `import { env } from '@/env'` instead to ensure validated types.",
+        },
+        {
+          name: "Bun",
+          importNames: ["env"],
+          message:
+            "Use `import { env } from '@/env'` instead to ensure validated types.",
+        },
+        {
+          name: "zod",
+          message: "Use `import { z } from 'zod/v4'` instead to ensure v4.",
+        },
+      ],
     },
   },
   {
