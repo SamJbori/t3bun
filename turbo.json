@@ -22,7 +22,7 @@
       "outputLogs": "new-only"
     },
     "typecheck": {
-      "dependsOn": ["^topo", "^build"],
+      "dependsOn": ["^build"],
       "outputs": [".cache/tsbuildinfo.json"]
     }
   }
