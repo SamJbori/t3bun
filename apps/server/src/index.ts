@@ -4,7 +4,7 @@ import { logger } from "hono/logger";
 
 import "bun";
 
-import { auth } from "@repo/api";
+import { initAuth } from "@repo/api";
 
 import type { env } from "./env.js";
 
@@ -13,9 +13,6 @@ import type { env } from "./env.js";
 const app = new Hono<{ Bindings: typeof env }>();
 
 app.use(logger());
-
-// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-const x = auth;
 
 app.use(
   "/*",
@@ -40,8 +37,10 @@ app.get("/test", (c) => c.text("OK"));
 // app.use("/v0.1/*", trpc);
 
 app.on(["POST", "GET"], "/auth/*", (c) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+  const auth = initAuth();
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  return x.handler(c.req.raw);
+  return auth.handler(c.req.raw);
 });
 
 export default app;
