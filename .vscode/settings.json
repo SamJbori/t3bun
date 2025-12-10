@@ -10,5 +10,6 @@
   "files.associations": {
     "wrangler.json": "jsonc"
   },
-  "prettier.prettierPath": "node_modules/prettier"
+  "prettier.prettierPath": "node_modules/prettier",
+  "npm.packageManager": "bun"
 }

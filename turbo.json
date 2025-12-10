@@ -14,6 +14,9 @@
       "cache": false,
       "persistent": true
     },
+    "exports": {
+      "cache": false
+    },
     "lint": {
       "dependsOn": ["^lint"]
     },
@@ -34,6 +37,8 @@
     "VERCEL_ENV",
     "VERCEL_URL",
     "npm_lifecycle_event",
-    "MESSAGE"
+    "MONGODB_URI",
+    "CLOUDFLARE_TURNSTILE_SECRET_KEY",
+    "SERVER_TOKEN"
   ]
 }

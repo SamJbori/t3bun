@@ -1,4 +1,4 @@
-# @repo/constants
+# @repo/validators
 
 To install dependencies:
 

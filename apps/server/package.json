@@ -8,7 +8,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@repo/constants": "workspace:*",
+    "@repo/api": "workspace:*",
+    "@repo/validators": "workspace:*",
     "bun": "latest",
     "hono": "^4.10.8"
   },

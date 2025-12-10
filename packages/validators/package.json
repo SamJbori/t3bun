@@ -1,12 +1,16 @@
 {
-  "name": "@repo/constants",
+  "name": "@repo/validators",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+    "./db": {
+      "import": "./dist/db.js",
+      "types": "./dist/db.d.ts"
+    },
+    "./post": {
+      "import": "./dist/post.js",
+      "types": "./dist/post.d.ts"
     }
   },
   "main": "dist/index.js",
@@ -16,6 +20,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "exports": "bun run exportupdate.ts",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "dev": "tsc -p tsconfig.build.json --watch",
     "lint": "eslint --flag unstable_native_nodejs_ts_config",
@@ -25,10 +30,11 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@repo/eslint": "workspace:*",
     "@repo/prettier": "workspace:*",
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "typescript": "5.9.2"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "zod": "^4.1.13"
   },
   "prettier": "@repo/prettier/base"
 }
