@@ -14,6 +14,9 @@ const app = new Hono<{ Bindings: typeof env }>();
 
 app.use(logger());
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+const x = auth;
+
 app.use(
   "/*",
   cors({
@@ -33,11 +36,12 @@ app.use(
   }),
 );
 
+app.get("/test", (c) => c.text("OK"));
 // app.use("/v0.1/*", trpc);
 
 app.on(["POST", "GET"], "/auth/*", (c) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
-  return auth.handler(c.req.raw);
+  return x.handler(c.req.raw);
 });
 
 export default app;
