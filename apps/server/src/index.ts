@@ -14,6 +14,7 @@ export const trpc = trpcServer({
   createContext: async (_, c) => {
     return createTRPCContext({
       headers: c.req.raw.headers,
+      auth,
     });
   },
   onError: ({ path, error }) => {
