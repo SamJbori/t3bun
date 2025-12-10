@@ -25,5 +25,15 @@
       "dependsOn": ["^build"],
       "outputs": [".cache/tsbuildinfo.json"]
     }
-  }
+  },
+  "globalEnv": [],
+  "globalPassThroughEnv": [
+    "NODE_ENV",
+    "CI",
+    "VERCEL",
+    "VERCEL_ENV",
+    "VERCEL_URL",
+    "npm_lifecycle_event",
+    "MESSAGE"
+  ]
 }
