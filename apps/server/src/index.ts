@@ -35,6 +35,7 @@ app.use(
 app.use("/v0.1/*", trpc);
 
 app.on(["POST", "GET"], "/auth/*", (c) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   return auth.handler(c.req.raw);
 });
 
