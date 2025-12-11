@@ -3,10 +3,9 @@ import "bun";
 import { Hono } from "hono";
 
 import { env } from "./libs/env";
-import { initAuth, type Auth } from "./libs/auth";
+import { initAuth, type Auth, appRouter, createTRPCContext } from "@repo/api";
 import { MongoClient } from "mongodb";
 import { trpcServer } from "@hono/trpc-server";
-import { appRouter, createTRPCContext } from "./libs/trpc";
 import { createMiddleware } from "hono/factory";
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
