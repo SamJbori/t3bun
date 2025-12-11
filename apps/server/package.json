@@ -1,6 +1,9 @@
 {
   "name": "@repo/server",
   "type": "module",
+  "scripts": {
+    "dev": "bun run --hot --env-file=../../.env --port=3006 src/index.ts "
+  },
   "dependencies": {
     "@hono/trpc-server": "^0.4.1",
     "@repo/api": "workspace:*",
@@ -15,8 +18,12 @@
     "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@repo/eslint": "workspace:*",
+    "@repo/prettier": "workspace:*",
+    "@types/bun":"latest",
     "@types/node": "^22",
     "tsx": "^4.7.1",
     "typescript": "5.9.2"
-  }
+  },
+  "prettier": "@repo/prettier/base"
 }

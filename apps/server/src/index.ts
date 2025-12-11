@@ -10,8 +10,6 @@ import { createMiddleware } from "hono/factory";
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
 
-// const authPromise = import("./libs/auth.js").then((mod) => mod.auth);
-
 let DBClientPromise: Promise<MongoClient> | undefined;
 
 const getDBClientPromise = () => {
