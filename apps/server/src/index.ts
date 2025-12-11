@@ -12,6 +12,8 @@ import { appRouter, createTRPCContext, initAuth } from "@repo/api";
 
 import { env } from "./libs/env";
 
+// const authPromise = import("./libs/auth.js").then((mod) => mod.auth);
+
 let DBClientPromise: Promise<MongoClient> | undefined;
 
 const getDBClientPromise = () => {
