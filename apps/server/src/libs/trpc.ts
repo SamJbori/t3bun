@@ -6,17 +6,21 @@ import z, { ZodError } from "zod/v4";
 import type { AuthData } from "./auth";
 import { postRouter } from "../routers/posts";
 import { env } from "./env";
+import type { MongoClient } from "mongodb";
 
 export const createTRPCContext = ({
   headers,
   authData,
+  dbClient,
 }: {
   headers: Headers;
   authData: AuthData;
+  dbClient: MongoClient;
 }) => {
   return {
     user: authData?.user,
     headers,
+    dbClient,
     // resHeaders,
   };
 };
@@ -38,12 +42,13 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
 export const createTRPCRouter = t.router;
 
 const trpcMiddleware = t.middleware(async ({ next, path }) => {
-  const start = Date.now();
-
+  if (env.NODE_ENV === "development") {
+    const start = Date.now();
+    const result = await next();
+    const end = Date.now();
+    console.log(`[TRPC] ${path} took ${end - start}ms to execute`);
+  }
   const result = await next();
-
-  const end = Date.now();
-  console.log(`[TRPC] ${path} took ${end - start}ms to execute`);
 
   return result;
 });
@@ -51,12 +56,12 @@ const trpcMiddleware = t.middleware(async ({ next, path }) => {
 /**
  * Public (unauthed) procedure
  */
-export const publicProcedure = t.procedure.use(trpcMiddleware);
+const publicProcedure = t.procedure.use(trpcMiddleware);
 
 /**
  * Protected (anonymous authentication) procedure
  */
-export const anonymousProcedure = publicProcedure.use(({ ctx, next }) => {
+const anonymousProcedure = publicProcedure.use(({ ctx, next }) => {
   if (!ctx.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -72,7 +77,7 @@ export const anonymousProcedure = publicProcedure.use(({ ctx, next }) => {
 /**
  * Protected (LoggedIn users) procedure
  */
-export const loggedinProcedure = publicProcedure.use(({ ctx, next }) => {
+const loggedinProcedure = publicProcedure.use(({ ctx, next }) => {
   if (!ctx.user || ctx.user.isAnonymous) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -88,7 +93,7 @@ export const loggedinProcedure = publicProcedure.use(({ ctx, next }) => {
 /**
  * Coming from server
  */
-export const serverProcedure = publicProcedure.use(async ({ ctx, next }) => {
+const serverProcedure = publicProcedure.use(async ({ ctx, next }) => {
   const headerToken = ctx.headers.get("X-Hamem-Token");
   if (!headerToken) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
@@ -104,7 +109,7 @@ export const serverProcedure = publicProcedure.use(async ({ ctx, next }) => {
 /**
  * Platform Admins Only
  */
-export const adminProcedure = publicProcedure.use(({ ctx, next }) => {
+const adminProcedure = publicProcedure.use(({ ctx, next }) => {
   if (!ctx.user?.isAdmin) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
@@ -117,8 +122,19 @@ export const adminProcedure = publicProcedure.use(({ ctx, next }) => {
   });
 });
 
+const procedures = {
+  router: t.router,
+  publicProcedure,
+  anonymousProcedure,
+  loggedinProcedure,
+  adminProcedure,
+  serverProcedure,
+};
+
+export type TRPCProcedures = typeof procedures;
+
 export const appRouter = createTRPCRouter({
-  post: postRouter(publicProcedure),
+  post: postRouter(procedures),
 });
 
 // export type definition of API
