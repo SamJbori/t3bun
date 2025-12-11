@@ -1,3 +1,4 @@
+import type { DBCollections } from "@repo/validators/db";
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
 import type { MongoClient } from "mongodb";
 import { initTRPC, TRPCError } from "@trpc/server";
@@ -6,6 +7,7 @@ import z, { ZodError } from "zod/v4";
 
 import type { AuthData } from "./auth";
 import { postRouter } from "../routers/posts";
+import { dbCollection, fromDBToMany, fromDBToSingle } from "./db";
 import { env } from "./env";
 
 export const createTRPCContext = ({
@@ -17,11 +19,15 @@ export const createTRPCContext = ({
   authData: AuthData;
   dbClient: MongoClient;
 }) => {
+  const collection = (collectionName: DBCollections) =>
+    dbCollection(dbClient, collectionName);
   return {
     user: authData?.user,
     headers,
     dbClient,
-    // resHeaders,
+    collection,
+    fromDBToSingle,
+    fromDBToMany,
   };
 };
 

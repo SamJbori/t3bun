@@ -1,14 +1,16 @@
 import "bun";
 
-import { Hono } from "hono";
-
-import { env } from "./libs/env";
-import { initAuth, type Auth, appRouter, createTRPCContext } from "@repo/api";
-import { MongoClient } from "mongodb";
+import type { Auth } from "@repo/api";
 import { trpcServer } from "@hono/trpc-server";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { createMiddleware } from "hono/factory";
 import { logger } from "hono/logger";
-import { cors } from "hono/cors";
+import { MongoClient } from "mongodb";
+
+import { appRouter, createTRPCContext, initAuth } from "@repo/api";
+
+import { env } from "./libs/env";
 
 let DBClientPromise: Promise<MongoClient> | undefined;
 
@@ -37,7 +39,7 @@ app.use(
     exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
     maxAge: 86_400,
     credentials: true,
-  })
+  }),
 );
 
 const middleware = createMiddleware<{
@@ -67,7 +69,7 @@ app.use("/v0.1/*", middleware, async (c, n) => {
     },
     onError: ({ path, error }) => {
       console.error(
-        `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`
+        `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
       );
     },
   });
