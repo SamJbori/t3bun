@@ -1,5 +1,5 @@
 import type { DBCollections, DBCollectionsTypes } from "@repo/validators/db";
-import { MongoClient, ObjectId } from "mongodb";
+import type { MongoClient, ObjectId } from "mongodb";
 
 import { DBCollectionStore } from "@repo/validators/db";
 

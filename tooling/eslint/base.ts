@@ -81,6 +81,22 @@ export const config = defineConfig(
           message: "Use `import { z } from 'zod/v4'` instead to ensure v4.",
         },
       ],
+      "@typescript-eslint/consistent-type-imports": [
+        "warn",
+        { prefer: "type-imports", fixStyle: "separate-type-imports" },
+      ],
+      "@typescript-eslint/no-misused-promises": [
+        2,
+        { checksVoidReturn: { attributes: false } },
+      ],
+      "@typescript-eslint/no-unnecessary-condition": [
+        "error",
+        {
+          allowConstantLoopConditions: true,
+        },
+      ],
+      "@typescript-eslint/no-non-null-assertion": "error",
+      "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
     },
   },
   {
@@ -93,51 +109,3 @@ export const config = defineConfig(
     },
   },
 );
-
-// export const configx = [
-//   js.configs.recommended,
-//   eslintConfigPrettier,
-//   ...tseslint.configs.recommended,
-//   {
-//     plugins: {
-//       turbo: turboPlugin,
-//     },
-//     rules: {
-//       "turbo/no-undeclared-env-vars": "warn",
-//       // "no-restricted-properties": [
-//       //   "error",
-//       //   {
-//       //     object: "process",
-//       //     property: "env",
-//       //     message:
-//       //       "Use `import { env } from '@/env'` instead to ensure validated types.",
-//       //   },
-//       // ],
-//       "no-restricted-imports": [
-//         "error",
-//         {
-//           name: "process",
-//           importNames: ["env"],
-//           message:
-//             "Use `import { env } from '@/env'` instead to ensure validated types.",
-//         },
-//         {
-//           name: "Bun",
-//           importNames: ["env"],
-//           message:
-//             "Use `import { env } from '@/env'` instead to ensure validated types.",
-//         },
-//         {
-//           name: "zod",
-//           message: "Use `import { z } from 'zod/v4'` instead to ensure v4.",
-//         },
-//       ],
-//     },
-//   },
-//   {
-//     plugins: {},
-//   },
-//   {
-//     ignores: ["dist/**"],
-//   },
-// ];
