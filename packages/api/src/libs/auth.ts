@@ -22,7 +22,7 @@ export const initAuth = (dbClient: MongoClient) => {
       useSecureCookies: true,
       crossSubDomainCookies: {
         enabled: true,
-        domain: env.NODE_ENV === "development" ? undefined : ".vercel.app", // Domain with a leading period
+        domain: env.NODE_ENV === "development" ? undefined : "t3bun.vercel.app", // Domain with a leading period
       },
       defaultCookieAttributes: {
         secure: true,
