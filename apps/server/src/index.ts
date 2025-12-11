@@ -2,7 +2,6 @@ import "bun";
 
 import type { Auth } from "@repo/api";
 import { trpcServer } from "@hono/trpc-server";
-import { env } from "~libs/env";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { createMiddleware } from "hono/factory";
@@ -10,6 +9,8 @@ import { logger } from "hono/logger";
 import { MongoClient } from "mongodb";
 
 import { appRouter, createTRPCContext, initAuth } from "@repo/api";
+
+import { env } from "./libs/env";
 
 let DBClientPromise: Promise<MongoClient> | undefined;
 
