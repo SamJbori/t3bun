@@ -25,7 +25,13 @@ const authConfig = {
   trustedOrigins: (request) => {
     // Return an array of trusted origins based on the request
     const origin = request.headers.get("origin");
-    return [origin ?? ""];
+    if (
+      origin?.endsWith("myrepo.com") ||
+      origin?.includes("dev.myrepo.com:3")
+    ) {
+      return [origin];
+    }
+    return [];
   },
   user: {
     additionalFields: {
@@ -42,7 +48,7 @@ const authConfig = {
         defaultValue: false,
       },
       isAnonymous: { type: "boolean", required: false },
-      // Use your own logic For Privillaged Access
+      // Use your own logic
       isAdmin: { type: "boolean", required: false },
       role: {
         type: "string",

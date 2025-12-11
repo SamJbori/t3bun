@@ -9,7 +9,7 @@
     "jsxImportSource": "hono/jsx",
     "outDir": "./dist",
     "verbatimModuleSyntax": true,
-    "isolatedModules": true,
+    "isolatedModules": true, // Bun requires this
     "esModuleInterop": true,
     "moduleResolution": "bundler",
     "baseUrl": ".",
