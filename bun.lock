@@ -104,6 +104,7 @@
         "@repo/prettier": "workspace:*",
         "@repo/typescript": "workspace:*",
         "@types/bun": "latest",
+        "@types/node": "^22",
         "typescript": "5.9.2",
       },
       "peerDependencies": {
