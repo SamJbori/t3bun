@@ -8,9 +8,10 @@
     "lib": ["ESNext"],
     "allowJs": true,
     "resolveJsonModule": true,
-    "moduleDetection": "force",
+    // "moduleDetection": "force",
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
 
     /** Keep TSC performant in monorepos */
     "incremental": true,
@@ -31,5 +32,5 @@
     "moduleResolution": "Bundler",
     "noEmit": true
   },
-  "exclude": ["node_modules", "build", "dist", ".next", ".expo"]
+  "exclude": ["node_modules", "build", "dist", ".next", ".expo", ".cache"]
 }
