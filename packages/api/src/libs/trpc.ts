@@ -20,8 +20,8 @@ export const createTRPCContext = ({
   authData: AuthData;
   dbClient: MongoClient;
 }) => {
-  const collection = (collectionName: DBCollections) =>
-    dbCollection(dbClient, collectionName);
+  const collection = <T extends DBCollections>(name: T) =>
+    dbCollection<T>(dbClient, name);
   return {
     user: authData?.user,
     headers,
