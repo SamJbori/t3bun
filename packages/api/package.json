@@ -28,6 +28,7 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.7.0",
     "@repo/eslint": "workspace:*",
     "@repo/prettier": "workspace:*",
+    "@repo/typescript": "workspace:*",
     "@types/bun": "latest",
     "@types/lodash-es": "^4.17.12",
     "typescript": "5.9.2"

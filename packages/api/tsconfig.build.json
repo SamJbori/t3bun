@@ -1,12 +1,4 @@
 {
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "noEmit": false,
-    "allowImportingTsExtensions": false,
-    "declaration": true,
-    "emitDeclarationOnly": false,
-    "outDir": "./dist",
-    "rootDir": "./src"
-  },
+  "extends": "@repo/typescript/compile.json",
   "include": ["src"]
 }
