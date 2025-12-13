@@ -6,9 +6,10 @@
     "build": "bun run --bun --env-file=../../.env next build",
     "dev": "bun run --bun --env-file=../../.env  next dev",
     "format": "prettier --check . --ignore-path ../../.gitignore",
-    "lint": "eslint",
+    "lint": "bun run --bun --env-file=../../.env next typegen && eslint",
     "start": "bun run --bun --env-file=../../.env next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "bun run --bun --env-file=../../.env next typegen && tsc --noEmit",
+    "typegen": "bun run --bun --env-file=../../.env next typegen"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.13.8",
